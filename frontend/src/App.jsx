@@ -1,15 +1,17 @@
+import React from "react";
 import "./App.css";
-import axios from "axios";
+
+import { retrieveQuotes } from "../util/ApiUtils";
 
 function App() {
 
-	const retrieveQuotes = async () => {
-		return axios
-			.get("http://localhost:5173/api/quote?dayRange=365")
-			.catch((error) => {
-				console.error("Error fetching quotes", error);
-			});
-	};
+	// const retrieveQuotes = async () => {
+	// 	return axios
+	// 		.get("http://localhost:5173/api/quote?dayRange=365")
+	// 		.catch((error) => {
+	// 			console.error("Error fetching quotes", error);
+	// 		});
+	// };
 
 	const displayQuotes = async () => {
 		retrieveQuotes().then((response) => {
