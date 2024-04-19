@@ -1,20 +1,25 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
-
+import { ChakraProvider } from '@chakra-ui/react'
 import { retrieveQuotes } from "../util/ApiUtils";
 
 function App() {
+	const [dateRange, setDateRange] = useState();
+	
+	useEffect(() => {
+		if (dateRange) {
+			displayQuotes();
+		}
+	}, [dateRange]);
 
-	// const retrieveQuotes = async () => {
-	// 	return axios
-	// 		.get("http://localhost:5173/api/quote?dayRange=365")
-	// 		.catch((error) => {
-	// 			console.error("Error fetching quotes", error);
-	// 		});
-	// };
+	const handleDateChange = (event) => {
+		const filter = event.target.value;
+		setDateRange(filter);
+	}
 
 	const displayQuotes = async () => {
-		retrieveQuotes().then((response) => {
+		console.log(dateRange);
+		retrieveQuotes(dateRange).then((response) => {
 			console.log(response.data);
 		});
 	};
@@ -49,13 +54,12 @@ function App() {
 					Submit
 				</button>
 
-				<button 
-					type="submit"
-					onClick={displayQuotes}
-				
-				>
-					Retrieve Quotes
-				</button>
+				<select onChange={handleDateChange}>
+					<option value="all">All</option>
+					<option value="week">Last Week</option>
+					<option value="month">Last Month</option>
+					<option value="year">Last Year</option>
+				</select>
 			</form>
 
 			<h2>Previous Quotes</h2>
