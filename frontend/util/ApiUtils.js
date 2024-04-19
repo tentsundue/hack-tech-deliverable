@@ -8,3 +8,15 @@ export const retrieveQuotes = async (dateRange) => {
         });
 };
 
+export const addQuote = async (name, message) => {
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("message", message);
+
+    return axios
+        .post(`http://localhost:5173/api/quote`, formData)
+        .catch((error) => {
+            console.error("Error adding quote", error);
+        });
+}
+

@@ -58,7 +58,7 @@ def retrieve__message(dayRange: str) -> list[Quote]:
     range_conv = {"week": 7,
                   "month": 30,
                   "year": 365,
-                  "all": 0
+                  "all": 100000000
                   }  # dictionary to store the day ranges
 
     quotes = database["quotes"]  # retrieve all quotes from the database
