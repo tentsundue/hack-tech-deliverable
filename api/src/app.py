@@ -48,3 +48,23 @@ def post_message(name: str = Form(), message: str = Form()) -> RedirectResponse:
 
 
 # TODO: add another API route with a query parameter to retrieve quotes based on max age
+@app.get("/quote")
+def retrieve__message(dayRange: int) -> list[Quote]:
+    """
+    Retrieve a list of quotes posted within the day range given
+
+    dayRangeFilter: int -> the maximum number of days that the quote was posted
+    """
+    quotes = database["quotes"]  # retrieve all quotes from the database
+    dateFilteredQuotes = []
+
+    for quote in quotes:
+        post_date = datetime.fromisoformat(quote["time"])
+        # retrieve the difference between the current date and the date that the quote was posted
+        difference = datetime.now() - post_date
+
+        # Check if the difference is within the specified range, add to returned list of quotes if it is
+        if (difference.days <= dayRange):
+            dateFilteredQuotes.append(quote)
+
+    return dateFilteredQuotes

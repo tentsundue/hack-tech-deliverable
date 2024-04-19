@@ -1,6 +1,22 @@
 import "./App.css";
+import axios from "axios";
 
 function App() {
+
+	const retrieveQuotes = async () => {
+		return axios
+			.get("http://localhost:5173/api/quote?dayRange=365")
+			.catch((error) => {
+				console.error("Error fetching quotes", error);
+			});
+	};
+
+	const displayQuotes = async () => {
+		retrieveQuotes().then((response) => {
+			console.log(response.data);
+		});
+	};
+
 	return (
 		<div className="App">
 			{/* TODO: include an icon for the quote book */}
@@ -10,10 +26,34 @@ function App() {
 			{/* TODO: implement custom form submission logic to not refresh the page */}
 			<form action="/api/quote" method="post">
 				<label htmlFor="input-name">Name</label>
-				<input type="text" name="name" id="input-name" required />
+				<input 
+					type="text" 
+					name="name" 
+					id="input-name"
+					required 
+				/>
+
 				<label htmlFor="input-message">Quote</label>
-				<input type="text" name="message" id="input-message" required />
-				<button type="submit">Submit</button>
+				<input 
+					type="text" 
+					name="message" 
+					id="input-message" 
+					required
+				/>
+
+				<button 
+					type="submit"
+				>
+					Submit
+				</button>
+
+				<button 
+					type="submit"
+					onClick={displayQuotes}
+				
+				>
+					Retrieve Quotes
+				</button>
 			</form>
 
 			<h2>Previous Quotes</h2>
