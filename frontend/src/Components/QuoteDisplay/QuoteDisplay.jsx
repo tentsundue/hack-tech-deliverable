@@ -10,6 +10,10 @@ function QuoteDisplay({
     const [currentQuotes, setCurrentQuotes] = useState(allQuotes);
 
     useEffect(() => {
+        setCurrentQuotes(allQuotes);
+    }, [allQuotes]);
+    
+    useEffect(() => {
         console.log(dateRange);
         console.log(currentQuotes);
         handleRetrieveQuotes();
