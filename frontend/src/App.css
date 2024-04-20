@@ -1,3 +1,7 @@
+body {
+    background-color: #d3e9ff;
+}
+
 .title {
     font-size: 1.5em;
     display: flex;
@@ -7,6 +11,14 @@
     flex-direction: column;
 }
 
+.section-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    flex-direction: column;
+
+}
 .quote-form {
     display: flex;
     justify-content: center;
@@ -27,7 +39,7 @@
     border: solid;
     border-width: 1px;
     border-color: #232425;
-    border-radius: 15px;
+    border-radius: 10px;
 }
 
 #input-message {
@@ -38,7 +50,7 @@
     border: solid;
     border-width: 1px;
     border-color: #232425;
-    border-radius: 15px;
+    border-radius: 10px;
 }
 
 #submit-button {
@@ -48,13 +60,15 @@
 
     border: solid;
     border-width: 0.3px;
-    border-color: #a4a5a7;
     border-radius: 15px;
 
-    background-color: #74b6f877;
+    background-color: #59b6eb83;
+
+    cursor: pointer;
 }
 
 .divider {
     margin-top: 30px;
     border: solid 1px #a4a5a7;
 }
+

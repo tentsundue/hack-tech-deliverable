@@ -2,7 +2,7 @@ from datetime import datetime
 from typing import TypedDict
 
 from fastapi import FastAPI, Form, status
-from fastapi.responses import RedirectResponse
+from fastapi.responses import RedirectResponse, JSONResponse
 
 from services.database import JSONDatabase
 
@@ -44,7 +44,7 @@ def post_message(name: str = Form(), message: str = Form()) -> RedirectResponse:
     database["quotes"].append(quote)
 
     # You may modify the return value as needed to support other functionality
-    return RedirectResponse("/", status.HTTP_303_SEE_OTHER)
+    return JSONResponse(content={"message": "Quote added successfully"}, status_code=status.HTTP_201_CREATED)
 
 
 # TODO: add another API route with a query parameter to retrieve quotes based on max age

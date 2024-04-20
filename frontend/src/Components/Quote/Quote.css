@@ -1,0 +1,23 @@
+.quote-container {
+    width:800px;
+    margin: auto;
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+
+    border: solid 3px #59b6eb83;
+    margin-top: 30px;
+    transition: 0.5s;
+
+    background-color: #c8e9fcd3;
+
+}
+
+.quote-container:hover {
+    background-color: #59b6eb83;
+    transform: scale(1.1);
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.5);
+
+}
+
