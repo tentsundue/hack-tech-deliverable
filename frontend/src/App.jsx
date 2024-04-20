@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import "./App.css";
 import { retrieveQuotes, addQuote } from "../util/ApiUtils";
 import quotebooklogo from "../src/images/quotebook.png";
+import QuoteDisplay from "../src/Components/QuoteDisplay/QuoteDisplay"
 
 function App() {
 	const [dateRange, setDateRange] = useState("all");
@@ -10,9 +11,10 @@ function App() {
 	const [canSubmit, setCanSubmit] = useState(false);
 
 	useEffect(() => {
-		if (dateRange) {
-			displayQuotes();
-		}
+		// if (dateRange) {
+		// 	displayQuotes();
+		// }
+
 		if (name && message) {
 			setCanSubmit(true); // enable the submit button if both fields are filled
 		}
@@ -22,29 +24,19 @@ function App() {
 		}
 
 	}, [dateRange, name, message]);
-
-	const handleDateChange = (event) => {
-		const filter = event.target.value;
-		setDateRange(filter);
-	}
 	
 	// handles the name input field and updates the name state whenever the field changes
-	const handleNameChange = (event) => {
+	const handleNameChange = useCallback((event) => {
 		const name = event.target.value;
 		setName(name);
-	}
+	});
 
 	// handles the message input field and updates the message state whenever the field changes
-	const handleMessageChange = (event) => {
+	const handleMessageChange = useCallback((event) => {
 		const message = event.target.value;
 		setMessage(message);
-	}
-	const displayQuotes = async () => {
-		console.log(dateRange);
-		retrieveQuotes(dateRange).then((response) => {
-			console.log(response.data);
-		});
-	};
+	});
+
 
 	// If the name and message fields are filled (canSubmit == true) --> add the quote to the database
 	const submitQuote = async () => {
@@ -62,7 +54,7 @@ function App() {
 				<h1>Hack at UCI QuoteBook</h1>
 				<img src={quotebooklogo}></img>
 			</div>
-			<h2>Got something to Share?</h2>
+			<h2>Got Something to Share?</h2>
 			{/* TODO: implement custom form submission logic to not refresh the page */}
 			<form className="quote-form">
 				<label htmlFor="input-name"></label>
@@ -93,22 +85,14 @@ function App() {
 				>
 					Submit
 				</button>
-
-				<select onChange={handleDateChange}>
-					<option value="all">All</option>
-					<option value="week">Last Week</option>
-					<option value="month">Last Month</option>
-					<option value="year">Last Year</option>
-				</select>
 			</form>
 
-			<h2>Previous Quotes</h2>
+			<div className="divider"></div>
+			<h2>What Others Have Been Saying...</h2>
+			
+			<QuoteDisplay />
 			{/* TODO: Display the actual quotes from the database */}
-			<div className="messages">
-				<p>Peter Anteater</p>
-				<p>Zot Zot Zot!</p>
-				<p>Every day</p>
-			</div>
+
 		</div>
 	);
 }

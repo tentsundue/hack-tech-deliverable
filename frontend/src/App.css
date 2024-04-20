@@ -53,3 +53,8 @@
 
     background-color: #74b6f877;
 }
+
+.divider {
+    margin-top: 30px;
+    border: solid 1px #a4a5a7;
+}
